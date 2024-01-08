@@ -12,7 +12,7 @@ const gegtImagesNames = async (req, res) => {
       console.log(req.files);
       let tab = [];
       files.map(x => {
-        tab.push(process.env.HOST + x.originalname)
+        tab.push("https://urakkahuuto.fi/public/images/" + x.originalname)
       })
       return res.status(201).json(tab);
   
@@ -310,7 +310,7 @@ const setWinnerBid = async (req, res) => {
     
     getBid.winner = req.body.winner;
     getBid.status = "closed"
-    
+
     await getBid.save()
     
     return res.status(200).json({bid:getBid});
