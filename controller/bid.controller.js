@@ -310,7 +310,7 @@ const setWinnerBid = async (req, res) => {
     
     getBid.winner = req.body.winner;
     getBid.status = "closed"
-
+    
     await getBid.save()
     
     return res.status(200).json({bid:getBid});
