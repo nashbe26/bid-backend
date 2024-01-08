@@ -11,7 +11,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 dotenv.config();
 const stripe = require('stripe')('sk_test_51HEvaHLlNX7wORuBfcF6maeJ60yhJn3E7EWjKO7nAKKpgSoXo0IMUvVS04zQTbuVbHmcuriGxw8ORX1U7wGICybC00eeGtxOih');
-const endpointSecret = "whsec_de2a49c73dd54a5275b897413b12e85de8fd63052a3ad5f0da1eeb42d77c4807";
+const endpointSecret = "whsec_ZkCDoJwLadIBGfwxz1ZzuKpHMGEX9JEu";
 
 // database connect
 const User = require('./models/user')
