@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: connectionTypes, // Use the predefined connection types
     required: true,
+    default:'local'
   },
   balance: {
     type: Number,
