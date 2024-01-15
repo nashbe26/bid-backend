@@ -28,6 +28,11 @@ const getUser = async (req, res) => {
             populate: {
               path: 'prod_id',
             },
+        }).populate({
+            path: 'bids_won',
+            populate: {
+              path: 'prod_id',
+            },
         });
         if (!user) {
             return res.status(404).json({ error: 'User not found.' });

@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 const moment = require('moment');
 
 const jwt = require('jsonwebtoken');
-dotenv.config()
+dotenv.config();
 
 GOOGLE_CLIENT_ID = "346052481883-n9ai8vbebqd0p3evb2l5p2tnsmol4qn6.apps.googleusercontent.com"
 GOOGLE_CLIENT_SECRET = "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"

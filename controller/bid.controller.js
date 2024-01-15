@@ -25,8 +25,9 @@ const gegtImagesNames = async (req, res) => {
   const updateBidClosedStatus = async (id) => {
     try {
 
-    const bidOne = await Bid.findById(id)
+    const bidOne = await Bid.findById(id).populate('message_bid')
     bidOne.status = "closed"
+    bidOne.winner = bidOne.message_bid[bidOne.message_bid.length -1].sender
     await bidOne.save()
 
     return(`${bidOne._id} bids updated.`);
@@ -40,7 +41,7 @@ const createBid = async (req, res) => {
     try {   
 
         let owner = req.user._id;
-        let prod = {...req.body,owner};
+        let prod = {...req.body,owner,type:req.user.type};
 
         const newProduct = new Product(prod)
 
@@ -311,7 +312,11 @@ const setWinnerBid = async (req, res) => {
     getBid.winner = req.body.winner;
     getBid.status = "closed"
 
-    await getBid.save()
+    await getBid.save();
+
+    const GetUser = await User.findById(req.body.winner);
+    GetUser.bids_won.push(getBid._id);
+    await GetUser.save();
     
     return res.status(200).json({bid:getBid});
     
