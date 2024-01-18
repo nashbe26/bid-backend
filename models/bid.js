@@ -7,10 +7,6 @@ const bidSchema = new mongoose.Schema({
     ref: 'Product', 
     required: true,
   },
-  amount: {
-    type: Number,
-    required: true,
-  },
   message_bid: [{
     type: mongoose.Types.ObjectId,
     ref: 'MessageBid', 
@@ -26,6 +22,7 @@ const bidSchema = new mongoose.Schema({
   last_amount: {
     type: Number,
     required: true, 
+    default:0
   },
   mode: {
     type: String, 

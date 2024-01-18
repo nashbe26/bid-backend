@@ -230,12 +230,12 @@ const bidSearch = async (req, res) => {
       
       const { price, search, type } = req.query;
       const priceTab = price.split(',');
-      console.log(priceTab);
 
       const searchResults = await Product.find({
-        price: { $gte: priceTab[0], $lte: priceTab[1] },
-        title: new RegExp(search, 'i'), 
-        
+        $or: [
+          { title: new RegExp(search, 'i') },
+          { category: new RegExp(search, 'i') } // Replace 'yourCategoryValue' with the actual category value you are filtering by
+        ],        
       });
       
       const bidPromises = searchResults.map(async x => {
