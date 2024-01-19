@@ -2,6 +2,7 @@ const { generateToken } = require("../utils/jwt");
 const User = require('../models/user');
 const { forgotPasswordEmail, sendEmail, verifyYourAccount } = require("../utils/mailer");
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const register = async (req, res) => {
   
@@ -46,13 +47,13 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'email Invalid credentials' });
     }
 
     const isPasswordValid = await user.comparePassword(password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'pwd Invalid credentials' });
     }
 
     const token = generateToken({ userId: user._id });
@@ -69,7 +70,17 @@ const recoveryJWT = (user) => {
     expiresIn: process.env.JWT_RESET_ACCOUNT_DURATION,
   });
 };
+function generateRandomString(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
 
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomIndex);
+  }
+
+  return result;
+}
 const forgetAccount = async (req, res) => {
   try {
 
@@ -80,13 +91,16 @@ const forgetAccount = async (req, res) => {
 
     if (!user)
       return res.status(401).json(`Aucun compte avec cet e-mail`);
-
-    const token = recoveryJWT(user);
-    user.recovery_token = token;
-    const updateUser = await user.save();
-    sendEmail(forgotPasswordEmail(updateUser));
-    
-    return res.status(200).json({ data: user, token });
+      const random = generateRandomString(10)
+      const saltRounds = 10;
+      console.log(random);
+      const hashedPassword = bcrypt.hashSync(random, saltRounds);
+      user.password = hashedPassword;
+        
+      
+    sendEmail(forgotPasswordEmail({user,password:random}));
+    await user.save();
+    return res.status(200).json({ data: user });
 
   } catch (err) {
     console.log(err);
@@ -105,7 +119,7 @@ const resetAccount = async (req, res) => {
 
     if (!user) return res.status(401).json("Token is not valid");
 
-    const hash = bcrypt.hashSync(data.password, 10);
+    const hash = await bcrypt.hash(data.password, 10);
 
     let oneUser = await User.findOneAndUpdate(
       { recovery_token: data.token },

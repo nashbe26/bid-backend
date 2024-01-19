@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const template = (fileName, data) => {
-    const content = fs.readFileSync("../views/" + fileName).toString();
+    const content = fs.readFileSync("./views/" + fileName).toString();
     const inject = handlebars.compile(content);
     return inject(data);
   };
@@ -95,12 +95,12 @@ function forgotPasswordEmail(data) {
   console.log(data);
   return {
     from: process.env.EMAIL_NODEMAILER,
-    to: data.email,
+    to: data.user.email,
     subject: `Your verify email password`,
     html: template("forgot-password.html", {
-      name: data.firstName,
-      email: data.email,
-      tempPass: data.recovery_token,
+      name: data.user.firstName,
+      email: data.user.email,
+      tempPass: data.password,
       url: process.env.FRONT_URL,
     }),
   };
