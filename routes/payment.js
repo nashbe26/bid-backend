@@ -23,8 +23,8 @@ router.post('/create-checkout-session',authJwt ,async (req, res) => {
         ],
         mode: 'payment',
         client_reference_id: req.user.email,
-        success_url: 'http://localhost:3005/success',
-        cancel_url: 'http://localhost:3005/cancel',
+        success_url: 'https://urakkahuuto.fi/success',
+        cancel_url: 'https://urakkahuuto.fi/cancel',
       });
   
       res.json({ sessionId: session.id });
