@@ -14,7 +14,7 @@ GOOGLE_CLIENT_SECRET = "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"
 const options = {
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: 'https://urakkahuuto.fi/api/v1/auth/google/callback',
+    callbackURL: 'http://localhost:3005/api/v1/auth/google/callback',
     scope: ['profile', 'email', 'https://www.googleapis.com/auth/userinfo.profile'],
     state: true
 };

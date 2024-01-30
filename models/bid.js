@@ -45,6 +45,15 @@ const bidSchema = new mongoose.Schema({
   },
   date_end: {
     type: String, 
+  },
+  date_work_start: {
+    type: String, 
+  },
+  date_work_end: {
+    type: String, 
+  },
+  see_work:{
+    type:String
   }
 }, { timestamps: true });
 

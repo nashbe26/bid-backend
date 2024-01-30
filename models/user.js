@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema({
   tokenEmail: {
     type: String,
   },
+  company_name: {
+    type: String,
+  },
+  company_id: {
+    type: String,
+  },
   googleAuth: {
     id: String,
     accessToken: String,

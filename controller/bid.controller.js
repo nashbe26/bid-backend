@@ -12,7 +12,7 @@ const gegtImagesNames = async (req, res) => {
       console.log(req.files);
       let tab = [];
       files.map(x => {
-        tab.push("https://urakkahuuto.fi/public/images/" + x.originalname)
+        tab.push("http://localhost:3005/public/images/" + x.originalname)
       })
       return res.status(201).json(tab);
   
@@ -59,7 +59,10 @@ const createBid = async (req, res) => {
             time:req.body.time,
             date:req.body.date,
             time_end:req.body.time_end,
-            date_end:req.body.date_end
+            date_end:req.body.date_end,
+            date_work_start:req.body.date_work_start,
+            date_work_end:req.body.date_work_end,
+            seeing:req.body.see_work
         }) 
 
         console.log(bidInfo);
