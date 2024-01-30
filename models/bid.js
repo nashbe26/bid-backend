@@ -53,7 +53,8 @@ const bidSchema = new mongoose.Schema({
     type: String, 
   },
   see_work:{
-    type:String
+    type:String,
+    default:"Yes"
   }
 }, { timestamps: true });
 
