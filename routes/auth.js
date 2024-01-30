@@ -15,7 +15,7 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get('/google/callback', passport.authenticate("google"), async (req, res) => {
   console.log(req.user,"await User.findAndGenerateToken(req.body)");
   //const {user,accessToken} = await User.findAndGenerateToken(req.body);
-  res.redirect('https://urakkahuuto.fi/social-verif/'+req.user.googleAuth.accessToken)
+  res.redirect('https://urakkahuuto.fi//social-verif/'+req.user.googleAuth.accessToken)
 });
 
 module.exports = router;
