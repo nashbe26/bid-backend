@@ -12,7 +12,7 @@ const gegtImagesNames = async (req, res) => {
       console.log(req.files);
       let tab = [];
       files.map(x => {
-        tab.push("https://urakkahuuto.fi//public/images/" + x.originalname)
+        tab.push("https://urakkahuuto.fi/public/images/" + x.originalname)
       })
       return res.status(201).json(tab);
   
