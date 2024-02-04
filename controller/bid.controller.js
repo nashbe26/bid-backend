@@ -62,7 +62,8 @@ const createBid = async (req, res) => {
             date_end:req.body.date_end,
             date_work_start:req.body.date_work_start,
             date_work_end:req.body.date_work_end,
-            see_work:req.body.see_work
+            see_work:req.body.see_work,
+            method:req.body.payment
         }) 
 
         console.log(bidInfo);
