@@ -25,6 +25,19 @@ const userSchema = new mongoose.Schema({
   tokenEmail: {
     type: String,
   },
+  description:{
+    type: String,
+  },
+  cover_photo:{
+    type: String
+  },
+  location:{
+    type: String
+  },
+  photo:{
+    type: String,
+    default:'https://urakkahuuto.fi/public/images/user.png'
+  },
   company_name: {
     type: String,
   },
