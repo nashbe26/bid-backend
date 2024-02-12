@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
   },
   photo:{
     type: String,
-    default:'https://urakkahuuto.fi/public/images/user.png'
+    default:'http://localhost:3005/public/images/user.png'
   },
   company_name: {
     type: String,
